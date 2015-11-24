@@ -43,7 +43,7 @@ A Single Page App needs a way of responding to user navigation. In order to perf
     * Next, we need to add our first route:
 
         ``` javascript
-            app.config(function($stateProvider, $urlRouterProvider) {
+            app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
             $urlRouterProvider.otherwise("/");
 

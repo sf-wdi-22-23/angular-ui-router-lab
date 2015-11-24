@@ -5,17 +5,17 @@ var app = angular.module('wineApp', ['ui.router']);
 ////////////
 
 app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
-    $locationProvider.html5Mode({
-      enabled: true,
-      requireBase: false
-    });
+    // $locationProvider.html5Mode({
+    //   enabled: true,
+    //   requireBase: false
+    // });
 
     // return to wine-index if bad route request
-    $urlRouterProvider.otherwise("/wines");
+    $urlRouterProvider.otherwise("/");
 
     $stateProvider
     .state('home', {
-        url: '/home',
+        url: '/',
         template: "Home!"
     })
 
