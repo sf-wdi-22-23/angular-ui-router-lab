@@ -26,8 +26,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
 // CONTROLLERS //
 /////////////////
 
-app.controller('WinesIndexCtrl', function($scope) {
+app.controller('WinesIndexCtrl', function($scope, WineService) {
     console.log("Wine Index")
+    $scope.wines = WineService.query();
 })
 
 app.controller('WinesShowCtrl', function($scope) {
