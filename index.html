@@ -39,6 +39,12 @@
       </button>
       <a class="navbar-brand" ui-sref="wines-index">WineApp</a>
     </div><!-- /.navbar-collapse -->
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!-- <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li> -->
+        <li><a ui-sref="home">Home</a></li>
+      </ul>
   </div><!-- /.container-fluid -->
   </nav>
 
@@ -46,7 +52,6 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 col-md-offset-3">  <!-- ui-view goes here! -->
-        <h1>Welcome to Angular Routing with UI Router</h1>
         <ui-view></ui-view>
         <!-- WINE INFO HERE -->
         <a ui-sref="home">Home</a>
