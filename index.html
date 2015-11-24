@@ -10,8 +10,8 @@
   <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
   <!-- Bower Components -->
-  <script src="bower_components/angular/angular.min.js"></script>
-  <!-- <script src="bower_components/angular-route/angular-route.min.js"></script> -->
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
 
   <!-- App JS -->
   <script src="app.js"></script>
@@ -20,8 +20,11 @@
 <body>
   <div class="container">
     <div class="row">
-      <div class="col-md-6 col-md-offset-3">  <!-- ng-view goes here! -->
+      <div class="col-md-6 col-md-offset-3">  <!-- ui-view goes here! -->
+        <ui-view></ui-view>
         <!-- WINE INFO HERE -->
+        <a ui-sref="home">Home</a>
+        <a ui-sref="wines-index">Wine Index</a>
       </div>
     </div>
   </div>

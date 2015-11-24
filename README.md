@@ -5,7 +5,7 @@
 | Explore Routing in Single Page Apps |
 | Create route-specific view templates and controllers. |
 | Create RESTful Index and Show routes for a Wine resource. |
- 
+
 In this lab we will be working with templates and routing in angular.
 
 When a user goes to `/` they should see a list of wines (`wines#index`).
@@ -23,35 +23,39 @@ Our data (a list of wines) lives at the bottom of `app.js`. Eventually we will u
 * Clone this repo.
 * **Make sure to `bower install`.**
 * Note: We will need to run a local server once we start playing with routing.
-    - In the application directory run `python -m SimpleHTTPServer`.
+    - In the application directory run `python -m SimpleHTTPServer 8000`.
     - Then open your browser to "localhost:8000" (or similar).
 
-## ng-route
+## ui-router
 A Single Page App needs a way of responding to user navigation. In order to perform "frontend routing", we need a way to capture URL changes and respond to them. For example, if the user clicks on a link to "/wines/1414", we need our Angular application to know how to respond (what templates, controllers, and resources to use). What we *don't* want to happen is for the request to reach the server.
 
-1. Include `angular-route`:
+1. Include `ui-router`:
     * Run `bower install -s angular-route` in your terminal.
-    * Go to `index.html` and uncomment the angular-route script.
-    * Add an `ng-route` attribute to the `div` on `index.html#23`.
+    * Go to `index.html` and uncomment the ui-router script.
+    * Add an `ui-view` element inside the `div` on `index.html#23`.
 2. Configure your routes:
-    * In `app.js`, we need to add the `ngRoute` module:
+    * In `app.js`, we need to add the `ui.router` module:
 
         ``` javascript
-            var app = angular.module('wineApp', ['ngRoute']);
+            var app = angular.module('wineApp', ['ui.router']);
         ```
 
     * Next, we need to add our first route:
 
         ``` javascript
-            app.config(function($routeProvider){
-              $routeProvider
-                .when('/', {
-                  template: 'Home!'
-                })
+            app.config(function($stateProvider, $urlRouterProvider) {
+
+            $urlRouterProvider.otherwise("/");
+
+            $stateProvider
+              .state('home', {
+                url: '/',
+                template: "Home!"
+              })
             })
         ```
 3. Fire up your server:
-    * From your application directory, run `python -m SimpleHTTPServer`.
+    * From your application directory, run `python -m SimpleHTTPServer 8000`.
     * Then open your browser to "localhost:8000" (or similar).
     * You should see "Home!"
 
@@ -123,7 +127,7 @@ $routeProvider
     templateUrl: 'templates/index.html',
     controller: 'WinesIndexCtrl'
   })
-  .when('/wines/:id', { // the "id" parameter 
+  .when('/wines/:id', { // the "id" parameter
     templateUrl: 'templates/show.html',
     controller: 'WinesShowCtrl'
   })
