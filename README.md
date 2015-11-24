@@ -1,4 +1,4 @@
-##Angular Routing Lab
+## Angular Routing Lab
 
 | Objectives |
 | :--- |
@@ -6,7 +6,7 @@
 | Create route-specific view templates and controllers. |
 | Create RESTful Index and Show routes for a Wine resource. |
 
-In this lab we will be working with templates and routing in angular.
+In this lab we will be working with templates and routing in [Angular JS](https://angularjs.org/).
 
 When a user goes to `/` they should see a list of wines (`wines#index`).
 When a user goes to `/wines/:id` they should see a single wine (`wines#show`).
@@ -15,22 +15,22 @@ Our data (a list of wines) lives at the bottom of `app.js`. Eventually we will u
 
 ### Hash Parameters
 <a href="#setup">Setup</a><br/>
-<a href="#ng-route">ng-route</a><br/>
+<a href="#ui-router">ui-router</a><br/>
 <a href="#wine-list-challenge">Wine List Challenge</a><br/>
 <a href="#wine-show-challenge">Wine Show Challenge</a>
 
 ### Setup
 * Clone this repo.
-* **Make sure to `bower install`.**
+* **Make sure to run `bower install`.**
 * Note: We will need to run a local server once we start playing with routing.
     - In the application directory run `python -m SimpleHTTPServer 8000`.
     - Then open your browser to "localhost:8000" (or similar).
 
-## ui-router
-A Single Page App needs a way of responding to user navigation. In order to perform "frontend routing", we need a way to capture URL changes and respond to them. For example, if the user clicks on a link to "/wines/1414", we need our Angular application to know how to respond (what templates, controllers, and resources to use). What we *don't* want to happen is for the request to reach the server.
+## [ui-router](http://angular-ui.github.io/ui-router/)
+A Single Page App needs a way of responding to user navigation. In order to perform "front-end routing", we need a way to capture URL changes and respond to them. For example, if the user clicks on a link to "/wines/1414", we need our Angular application to know how to respond (what templates, controllers, and resources to use). What we *don't* want to happen is for the request to reach the server.
 
 1. Include `ui-router`:
-    * Run `bower install -s angular-route` in your terminal.
+    * Run `bower install -s angular-ui-router` in your terminal.
     * Go to `index.html` and uncomment the ui-router script.
     * Add an `ui-view` element inside the `div` on `index.html#23`.
 2. Configure your routes:
