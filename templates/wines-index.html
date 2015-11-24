@@ -1,6 +1,8 @@
 <h1>Wine Index (templates/wines-index.html)</h1>
 <div class="wines" ng-controller="WinesIndexCtrl">
   <ul>
-    <li ng-repeat="wine in wines">{{ wine.name }}</li>
+    <li ng-repeat="wine in wines">
+      <a ui-sref="wines-show({id: wine.id})">{{ wine.name }}</a>
+    </li>
   </ul>
 </div>

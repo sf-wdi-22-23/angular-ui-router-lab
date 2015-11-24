@@ -37,8 +37,9 @@ app.controller('WinesIndexCtrl', function($scope, WineService) {
     $scope.wines = WineService.query();
 })
 
-app.controller('WinesShowCtrl', function($scope) {
-    console.log("Wine Show")
+app.controller('WinesShowCtrl', function($scope, WineService, $stateParams) {
+    $scope.wine = WineService.get($stateParams.id);
+    console.log("Wine Show:", $scope.wine, $stateParams)
 })
 
 ////////////
