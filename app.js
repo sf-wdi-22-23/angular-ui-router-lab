@@ -20,6 +20,12 @@ app.config(function($stateProvider, $urlRouterProvider) {
         controller: "WinesIndexCtrl"
     })
 
+    .state('wines-show', {
+        url: "/wines/:id",
+        templateUrl: "templates/wines-show.html",
+        controller: "WinesShowCtrl"
+    })
+
 })
 
 /////////////////
