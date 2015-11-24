@@ -11,11 +11,11 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     });
 
     // return to wine-index if bad route request
-    $urlRouterProvider.otherwise("/");
+    $urlRouterProvider.otherwise("/wines");
 
     $stateProvider
     .state('home', {
-        url: '/',
+        url: '/home',
         template: "Home!"
     })
 
