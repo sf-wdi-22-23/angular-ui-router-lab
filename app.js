@@ -1,4 +1,4 @@
-var app = angular.module('wineApp', ['ui.router']);
+var app = angular.module('wineApp', []);
 
 ////////////
 // ROUTES //
@@ -13,38 +13,14 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
     // return to wine-index if bad route request
     $urlRouterProvider.otherwise("/");
 
-    $stateProvider
-    .state('home', {
-        url: '/',
-        template: "Home!"
-    })
-
-    .state('wines-index', {
-        url: "/wines",
-        templateUrl: "templates/wines-index.html",
-        controller: "WinesIndexCtrl"
-    })
-
-    .state('wines-show', {
-        url: "/wines/:id",
-        templateUrl: "templates/wines-show.html",
-        controller: "WinesShowCtrl"
-    })
-
 })
 
 /////////////////
 // CONTROLLERS //
 /////////////////
 
-app.controller('WinesIndexCtrl', function($scope, WineService) {
-    console.log("Wine Index")
-    $scope.wines = WineService.query();
-})
-
-app.controller('WinesShowCtrl', function($scope, WineService, $stateParams) {
-    $scope.wine = WineService.get($stateParams.id);
-    console.log("Wine Show:", $scope.wine, $stateParams)
+app.controller('WinesIndexCtrl', function($scope) {
+    console.log("Wine Index");
 })
 
 ////////////
