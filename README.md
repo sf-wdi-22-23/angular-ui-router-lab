@@ -86,9 +86,9 @@ A Single Page App needs a way of responding to user navigation. In order to perf
               $scope.hello = "wine index controller is working!";
             })
         ```
-    * And update our `wines-index.html` template to include:
+    - And update our `wines-index.html` template to include:
         - `{{hello}}` in a `div`, `p`, or `h1` tag *Note: Angular uses double curly brackets for injecting variables, like this: `{{ variable.property }}`. *
-    * When you refresh you should see: "wine index controller is working!" *Note: This is because the WineIndexCtrl contains the $scope.hello value. $scope is a strange, global-esque variable.*
+    - When you refresh you should see: "wine index controller is working!" *Note: This is because the WineIndexCtrl contains the $scope.hello value. $scope is a strange, global-esque variable.*
 
     `wines-index.html`
     ```html
@@ -168,7 +168,7 @@ app.controller('WinesShowCtrl', function ($scope, WineService, $routeParams) {
 </div>
 ```
 
-Can you get it working now that you know how to grab the correct `id`? What method (*hint: HTTP verb*) could **get** you that specific wine? How would you display only that individual wine? *hint: how did you display the greeting on your wines#index page?*
+Can you get it working now that you know how to grab the correct `id`? What method could **get** you that specific wine? How would you display only that individual wine? *hint: $scope*
 
 ### Stretch: Prettify || More Routing
 Go crazy. Use Bootstrap to make a fancy index and show page, listing out all the wine info, and showing an image for each of them.
