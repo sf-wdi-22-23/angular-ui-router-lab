@@ -37,15 +37,15 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 // CONTROLLERS //
 /////////////////
 
-app.controller('WinesIndexCtrl', function($scope, WineService) {
+app.controller('WinesIndexCtrl', ['$scope', "WineService", function($scope, WineService) {
     console.log("Wine Index")
     $scope.wines = WineService.query();
-})
+}])
 
-app.controller('WinesShowCtrl', function($scope, WineService, $stateParams) {
+app.controller('WinesShowCtrl', ['$scope', 'WineService', '$stateParams', function($scope, WineService, $stateParams) {
     $scope.wine = WineService.get($stateParams.id);
     console.log("Wine Show:", $scope.wine, $stateParams)
-})
+}])
 
 ////////////
 // MODELS //
