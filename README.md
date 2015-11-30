@@ -97,10 +97,10 @@ A Single Page App needs a way of responding to user navigation. In order to perf
 6. Now let's add a value to `WineIndexCtrl` (in `app.js`) so we can make sure we know how to have it show up in the view.
 
         ``` javascript
-            app.controller('WinesIndexCtrl', function($scope){
+            app.controller('WinesIndexCtrl', ['$scope', "WineService", function($scope){
               console.log("Wine Index");
               $scope.hello = "wine index controller is working!";
-            })
+            }]);
         ```
         
     * Update the `wines-index.html` template to include:
@@ -120,11 +120,13 @@ A Single Page App needs a way of responding to user navigation. In order to perf
 
 ### Wine List Challenge
 
-Can you display a list of all the wines on the wines index page? (Start by using the mock data object called `ALL_WINES` at the bottom of `app.js`).
+1. Can you display a list of all the wines on the wines index page? (Start by using the mock data object called `ALL_WINES` at the bottom of `app.js`).
 
 <!-- Sneaky review -->
 
-What directive would you use to loop through a list of wines?  Use  a directive to display only some of the information about each wine on the page (start with the name).
+1. What directive would you use to loop through a list of wines?  Use  a directive to display only some of the information about each wine on the page (start with the name).
+
+1. Once you have the proper data displayed on the wines index page, remove the hello message from the scope and the template.
 
 
 ### HTML5 Mode
@@ -137,6 +139,16 @@ Add, or uncomment, the following in your route configuration so that we don't ha
 ```
 
 Now instead of linking to `#/wines` or `#/wines/1424` we can link to `/wines` or `/wines/1424`.
+
+Note that this *will* break page reloads.  Since we're using a simple server, when we reload our page anywhere but the root route, the app tries to make a request to that route on the server.  When we have an Express backend, we'll use a catch-all route to just reload the index and let Angular hanlde it:
+
+```js
+// SERVER.JS
+    app.all('/*', function(req, res, next) {
+        // Just send the index.html for other files to support HTML5Mode
+        res.sendFile('index.html', { root: __dirname });
+    });
+```
 
 ### Wine Show Challenge
 
@@ -157,7 +169,7 @@ We'll handle urls for each individual wine with a `wine#show` route. To setup a 
 
 1. When a user navigates to `/wines/:id` we want to display the wine with the matching id!
 
-    * First, add a new state to the `$stateProvider`. Note how we handle the parameterized URL:
+    * First, add a new state to the `$stateProvider`. Note how we signal the parameterized URL:
 
         `app.js`
         ``` javascript
@@ -173,34 +185,54 @@ We'll handle urls for each individual wine with a `wine#show` route. To setup a 
           })
           .state('wines-show', {
             url: '/wines/:id', // the "id" parameter
-            templateUrl: 'templates/show.html',
+            templateUrl: 'templates/wines-show.html',
             controller: 'WinesShowCtrl'
           })
         ```
 
-    * Next, we need to inject a new module into `WinesShowCtrl` called `$routeParams`:
+    * Next, we need to inject a new module into the `WinesShowCtrl` called `$stateParams`. We'll also update the console log to check out what `$stateParams` is:
 
         `app.js`
         ``` javascript
-        app.controller('WinesShowCtrl', function ($scope, $routeParams) {
-            console.log($routeParams.id);
-        });
+        app.controller('WinesShowCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
+            console.log("Wine Show:", $stateParams);
+        }])
         ```
 
-`templates/wines-show.html`
-```html
-<div class="container" ng-controller="WinesShowCtrl">
-  <h2>{{ wine.name }}</h2>
-</div>
-```
+1. Now that we have access the url parameters in the controller, let's update the view.  
 
-Can you get it working now that you know how to grab the correct `id`? What method could **get** you that specific wine? How would you display only that individual wine? *hint: $scope*
+    * In the template for the wine show page, we currently have just a message saying "Welcome to Wine Show".  Add a div to attach the correct controller and a header that will display the name of the wine whose id matches the url.
+
+        `templates/wines-show.html`
+        ```html
+        <div class="container" ng-controller="WinesShowCtrl">
+          <h2>{{ wine.name }}</h2>
+        </div>
+        ```
+
+    * Can you get the wine's name showing now that you know how to grab the correct `id` in the controller? Hint: Get the wine from `ALL_WINES` with that id, and display it by manipulating the `WinesShowCtrl` `$scope`.
+
 
 ### Stretch: Using A Service. 
 
-Take a look at the `WineService` object.  Can you get it working using the `WineService`, without using `ALL_WINES` directly?
-- How would you [inject](https://docs.angularjs.org/guide/di) the `WineService` into `WineIndexCtrl`?
-- How would you **query** *all* of the wines?
+It's annoying to have to manually loop through our `ALL_WINES` object to find the right wine, and it doesn't really match how we'll use Angular to access data in real-world projects (with `$http`).
+
+Take a look at the block of code that starts with `app.factory`.  It creates and returns a `WineService` object. 
+We haven't talked about services or factories yet, but for now just know that we'll be able to add the `WineService` to any controller and use it inside that controller.  
+
+1. What does the `WineService` `query` method do?   What about `get`?
+
+1. Let's take advantage of `WineService`.  [Inject](https://docs.angularjs.org/guide/di) `WineService` into your `WinesIndexCtrl`, and use it to find all the wines instead of using `ALL_WINES` directly.
+
+    `app.js`
+    ```js
+    app.controller('WinesIndexCtrl', ['$scope', "WineService", function($scope, WineService) {
+        console.log("Wine Index")
+        $scope.wines = WineService.query();
+    }]);
+    ```
+    
+1. Inject `WineService` into your `WinesShowCtrl`, and use the `WineService` object to find just the wine you want to display, instead of using `ALL_WINES`. 
 
 ### Stretch: Prettify || More Routing
 Go crazy. Use Bootstrap to make a fancy index and show page, listing out all the wine info, and showing an image for each of them.
