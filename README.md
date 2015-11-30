@@ -27,7 +27,7 @@ Our data (a list of wines) lives at the bottom of `app.js`. Eventually we will u
     - Then open your browser to "localhost:8000" (or similar).
 
 ## [ui-router](http://angular-ui.github.io/ui-router/)
-A Single Page App needs a way of responding to user navigation. In order to perform "front-end routing", we need a way to capture URL changes and respond to them. For example, if the user clicks on a link to "/wines/1414", we need our Angular application to know how to respond (what templates, controllers, and resources to use). We *don't* want to make a new request to the server just because we go to a new URL. When we move back into MEAN, our Express server will handle database interactions for our own API. For now, though, Angular will be able to handle all routing and all request to the external API we're using. Let's get started!
+A Single Page App needs a way of responding to user navigation. In order to perform "front-end routing", we need a way to capture URL changes and respond to them. For example, if the user clicks on a link to "/wines/1414", we need our Angular application to know how to respond (what templates, controllers, and resources to use). We *don't* always want to make a new request to the server just because we go to a new URL. When we move back into MEAN, our Express server will handle database interactions for our own API. For now, though, Angular will be able to handle all routing and all request to the external API we're using. Let's get started!
 
 1. Include `ui-router`:
     * Run `bower install -s angular-ui-router` in your terminal.
