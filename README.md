@@ -11,7 +11,7 @@ In this lab we will be working with templates and routing in [Angular JS](https:
 When a user goes to `/` they should see a list of wines (`wines#index`).
 When a user goes to `/wines/:id` they should see a single wine (`wines#show`).
 
-Our data (a list of wines) lives at the bottom of `app.js`. Eventually we will use AJAX to retrieve this so we can perform all CRUD operations, but for now it's hardcoded.
+Our data (a list of wines) lives at the bottom of `app.js`. With an API, we could use AJAX to retrieve this so we can perform all CRUD operations, but for now it's hardcoded.
 
 ### README Contents
 <a href="#setup">Setup</a><br/>
@@ -140,12 +140,12 @@ Add, or uncomment, the following in your route configuration so that we don't ha
 
 Now instead of linking to `#/wines` or `#/wines/1424` we can link to `/wines` or `/wines/1424`.
 
-Note that this *will* break page reloads.  Since we're using a simple server, when we reload our page anywhere but the root route, the app tries to make a request to that route on the server.  When we have an Express backend, we'll use a catch-all route to just reload the index and let Angular hanlde it:
+Note that this change *will* break page reloads.  A reload in the browser always makes a get request to the server for the current URL. So, the app expects the server to have a `/wines` or a `/wines/1424` route set up.  Ours doesn't; it's just serving `index.html` at the root route because of convention.  When we have an Express backend, we'll use a catch-all `/*` route to capture any requests that should really be handled by Angular (like reloads). The catch-all route will serve the index again so Angular can take over:
 
 ```js
 // SERVER.JS
     app.all('/*', function(req, res, next) {
-        // Just send the index.html for other files to support HTML5Mode
+        // Just send the index.html to support HTML5Mode
         res.sendFile('index.html', { root: __dirname });
     });
 ```
