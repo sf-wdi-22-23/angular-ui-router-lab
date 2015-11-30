@@ -36,13 +36,13 @@ A Single Page App needs a way of responding to user navigation. In order to perf
 2. Configure your routes:
     * In `app.js`, we need to add the `ui.router` module:
 
-        ``` javascript
+        ```javascript
             var app = angular.module('wineApp', ['ui.router']);
         ```
 
     * Next, we need to add our first route. The `$urlProvider.otherwise("/")` line tells the angular app what the default state and url should be.  Find the config section for your app in `app.js`, and add the `$stateProvider` below:
 
-        ``` javascript
+        ```javascript
             app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
             $urlRouterProvider.otherwise("/");
@@ -68,7 +68,7 @@ A Single Page App needs a way of responding to user navigation. In order to perf
 5. Associate a state with a controller and a template file:
     * Let's see how we can attach a template to a specific controller. First, add a new `/wines-index` state in the `$stateProvider`:
             `app.js`
-        ``` javascript
+        ```javascript
             app.config(function($locationProvider, $stateProvider, $urlRouterProvider){
               $stateProvider
               .state('wines-index', {
@@ -77,10 +77,11 @@ A Single Page App needs a way of responding to user navigation. In order to perf
               
             })
         ```
+        
     * All we have to do now is fill in this new state.  Add the `wines-index.html` template, the url `"/wines"`, and the name of the controller we want to use. The `'wines-index'` state should now look like this:
 
         `app.js`
-        ``` javascript
+        ```javascript
             app.config(function($locationProvider, $stateProvider, $urlRouterProvider){
               $stateProvider
               .state('wines-index', {
@@ -94,29 +95,30 @@ A Single Page App needs a way of responding to user navigation. In order to perf
 
     * Navigate to `http://localhost:8000/#/wines` to see your new route in action! By default, Angular adds that `#` to the URL. We'll see in a few steps how to use HTML5 mode to get rid of it.
     
-6. Now let's add a value to `WineIndexCtrl` (in `app.js`) so we can make sure we know how to have it show up in the view.
+    
+6. Now let's add a value to `WinesIndexCtrl` (in `app.js`) so we can make sure we know how to have it show up in the view.
 
-        ``` javascript
+
+    ```js
+        
             app.controller('WinesIndexCtrl', ['$scope', "WineService", function($scope){
               console.log("Wine Index");
               $scope.hello = "wine index controller is working!";
             }]);
-        ```
-        
-    * Update the `wines-index.html` template to include:
-        - `{{hello}}` in a `div`, `p`, or `h1` tag (your choice!) *Note: Angular uses double curly brackets for interpolating variables, like this: `{{ variable.property }}`.*
-    - When you refresh you should see: "wine index controller is working!" *Note: This is because the WineIndexCtrl now contains the $scope.hello value.*
-
-    `wines-index.html`
-    ```html
-    <div class="container" ng-controller="WinesIndexCtrl">
-      <p>{{ hello }}</p>
-      <ul>
-        <li> <!-- wines will go here -->
-        </li>
-      </ul>
-    </div>
     ```
+        
+    * Update the `wines-index.html` template to include: `{{hello}}` in a `div`, `p`, or `h1` tag (your choice!).  When you refresh, you should see: "wine index controller is working!" *Note: This is because the WinesIndexCtrl now contains the $scope.hello value.*
+
+        `wines-index.html`
+        ```html
+        <div class="container" ng-controller="WinesIndexCtrl">
+          <p>{{ hello }}</p>
+          <ul>
+            <li> <!-- wines will go here -->
+            </li>
+          </ul>
+        </div>
+        ```
 
 ### Wine List Challenge
 
@@ -131,7 +133,7 @@ A Single Page App needs a way of responding to user navigation. In order to perf
 
 ### HTML5 Mode
 Add, or uncomment, the following in your route configuration so that we don't have to use the query hash for navigation:
-``` javascript
+```javascript
     $locationProvider.html5Mode({
       enabled: true,
       requireBase: false
@@ -172,7 +174,7 @@ We'll handle urls for each individual wine with a `wine#show` route. To setup a 
     * First, add a new state to the `$stateProvider`. Note how we signal the parameterized URL:
 
         `app.js`
-        ``` javascript
+        ```javascript
         $stateProvider
           .state('home', {
             url: '/',
@@ -193,7 +195,7 @@ We'll handle urls for each individual wine with a `wine#show` route. To setup a 
     * Next, we need to inject a new module into the `WinesShowCtrl` called `$stateParams`. We'll also update the console log to check out what `$stateParams` is:
 
         `app.js`
-        ``` javascript
+        ```javascript
         app.controller('WinesShowCtrl', ['$scope', '$stateParams', function($scope, $stateParams) {
             console.log("Wine Show:", $stateParams);
         }])
@@ -241,7 +243,7 @@ Alternatively, try writing some functions in your controllers (attached as prope
 
 Here are some of the wine fields we have to work with:
 
-``` json
+```json
 {
     "id": 1429,
     "created_at": "2015-10-13T01:30:28.631Z",
