@@ -13,7 +13,7 @@ When a user goes to `/wines/:id` they should see a single wine (`wines#show`).
 
 Our data (a list of wines) lives at the bottom of `app.js`. Eventually we will use AJAX to retrieve this so we can perform all CRUD operations, but for now it's hardcoded.
 
-### Hash Parameters
+### README Contents
 <a href="#setup">Setup</a><br/>
 <a href="#ui-router">ui-router</a><br/>
 <a href="#wine-list-challenge">Wine List Challenge</a><br/>
