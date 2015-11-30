@@ -19,9 +19,13 @@ app.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 // CONTROLLERS //
 /////////////////
 
-app.controller('WinesIndexCtrl', function($scope) {
+app.controller('WinesIndexCtrl', ['$scope', function($scope) {
     console.log("Wine Index");
-})
+}]);
+
+app.controller('WinesShowCtrl', ['$scope', function($scope) {
+    console.log("Wine Show");
+}]);
 
 ////////////
 // MODELS //
